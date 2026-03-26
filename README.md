@@ -13,39 +13,42 @@
 
 </div>
 
+
+> **Stop wasting the first hour of every engagement setting up your tools.**  
+> `easyrecon` strips away the friction. Run one command, get a perfectly categorized attack surface, and jump straight into hunting. 
+
 <br />
 
-> **Recon shouldn't feel like rebuilding your workflow for every new target.**  
-> Run one command. Handle the heavy setup. Jump straight into testing. `easyrecon` strips away the friction.
+## <img src="https://api.iconify.design/lucide/target.svg?color=%230ea5e9" width="24" align="top" /> Why You Must Have EasyRecon
 
-<br />
+If you do bug bounty or pentesting, you already know the pain: every new target starts with the exact same repetitive setup work. Chaining `subfinder`, piping to `httpx`, digging through text files for API endpoints. 
 
-## <img src="https://api.iconify.design/lucide/rocket.svg?color=%230ea5e9" width="24" align="top" /> Why this belongs in your toolkit
+**EasyRecon handles the heavy lifting for you automatically.**
 
 <table width="100%">
   <tr>
     <td width="33%" align="center" valign="top">
       <br />
-      <img src="https://api.iconify.design/lucide/timer.svg?color=%230ea5e9" width="32" /><br />
+      <img src="https://api.iconify.design/lucide/zap.svg?color=%230ea5e9" width="32" /><br />
       <br />
-      <strong>Instant Start</strong><br />
-      <span style="color:#64748b;">No more manual tool configurations or chaining scripts before every engagement.</span>
+      <strong>Save 60 Minutes</strong><br />
+      <span style="color:#64748b;">No manual configurations or chaining scripts. Just run the command and get to work.</span>
       <br /><br />
     </td>
     <td width="33%" align="center" valign="top">
       <br />
-      <img src="https://api.iconify.design/lucide/layers.svg?color=%2314b8a6" width="32" /><br />
+      <img src="https://api.iconify.design/lucide/maximize.svg?color=%2314b8a6" width="32" /><br />
       <br />
-      <strong>Broader Coverage</strong><br />
-      <span style="color:#64748b;">Runs multiple trusted tools in parallel, then cleanly merges and deduplicates output.</span>
+      <strong>Miss Nothing</strong><br />
+      <span style="color:#64748b;">It runs 7 trusted industry tools in parallel, then cleanly merges the results.</span>
       <br /><br />
     </td>
     <td width="33%" align="center" valign="top">
       <br />
-      <img src="https://api.iconify.design/lucide/sparkles.svg?color=%23f59e0b" width="32" /><br />
+      <img src="https://api.iconify.design/lucide/search-code.svg?color=%23f59e0b" width="32" /><br />
       <br />
-      <strong>Pristine Output</strong><br />
-      <span style="color:#64748b;">Get beautifully organized directories and a formatted report, not a chaotic text dump.</span>
+      <strong>Hunt Faster</strong><br />
+      <span style="color:#64748b;">It automatically parses exactly where admin panels, APIs, and sensitive files live.</span>
       <br /><br />
     </td>
   </tr>
@@ -53,7 +56,7 @@
 
 <br />
 
-## <img src="https://api.iconify.design/lucide/workflow.svg?color=%230ea5e9" width="24" align="top" /> The Pipeline
+## <img src="https://api.iconify.design/lucide/workflow.svg?color=%230ea5e9" width="24" align="top" /> The Orchestration Pipeline
 
 What exactly happens when you run `easyrecon target.com`:
 
@@ -82,9 +85,9 @@ flowchart LR
 
 <br />
 
-## <img src="https://api.iconify.design/lucide/folder-tree.svg?color=%230ea5e9" width="24" align="top" /> Smart Categorization
+## <img src="https://api.iconify.design/lucide/folder-kanban.svg?color=%230ea5e9" width="24" align="top" /> Smart Attack Surface Sorting
 
-Instead of combing through monolithic text files, `easyrecon` automatically buckets your targets so you know exactly where to strike first.
+Instead of combing through monolithic, messy text files, `easyrecon` acts like an analyst and automatically buckets your targets. **You know exactly where to strike first.**
 
 | Priority | Category | Match Signatures |
 | :--- | :--- | :--- |
@@ -111,7 +114,6 @@ cd easyrecon
 chmod +x install.sh
 ./install.sh
 ```
-*The setup script automatically resolves missing Python dependencies and fetches required Go binaries.*
 
 ### 3. Usage
 ```bash
