@@ -142,7 +142,7 @@ easyrecon target.com --threads 100 --output ~/bugbounty_vault
 # Run only specific modules 
 easyrecon target.com --phase enum
 
-# For help
+# More Creative Options
 easyrecon --help
 ```
 
