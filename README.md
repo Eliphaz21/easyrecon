@@ -148,6 +148,10 @@ easyrecon --help
 
 <br />
 
+## Screenshot
+
+![image alt](https://github.com/cybersecuritytools/easyrecon/blob/main/"Photo.png?raw=true)
+
 ## <img src="https://api.iconify.design/lucide/book-open-check.svg?color=%233b82f6" width="24" align="top" /> Legal & License
 
 **Disclaimer:** Only point `easyrecon` at assets you own or possess explicit, written permission to test. Unauthorized scanning is actionable and illegal.
