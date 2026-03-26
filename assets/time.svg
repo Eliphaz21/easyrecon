@@ -1,0 +1,61 @@
+<svg width="800" height="230" viewBox="0 0 800 230" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #0d1117; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .head { font-size: 10px; fill: #484f58; }
+    .task { font-size: 12px; fill: #8b949e; }
+    .bad  { font-size: 11px; fill: #f85149; font-weight: 700; }
+    .good { font-size: 11px; fill: #2ea043; font-weight: 700; }
+    .total-bad  { font-size: 13px; fill: #f85149; font-weight: 700; }
+    .total-good { font-size: 13px; fill: #2ea043; font-weight: 700; }
+    .total-label { font-size: 13px; fill: #e6edf3; font-weight: 700; }
+    .divider { stroke: #21262d; stroke-width: 1; }
+    .divider-strong { stroke: #30363d; stroke-width: 1.5; }
+    .bar-bad  { fill: #3d1a1a; }
+    .bar-good { fill: #122217; }
+  </style>
+  <rect width="800" height="230" class="bg"/>
+
+  <!-- header -->
+  <text x="30"  y="24" class="mono head">TASK</text>
+  <text x="420" y="24" class="mono head">WITHOUT EASYRECON</text>
+  <text x="640" y="24" class="mono head">WITH EASYRECON</text>
+  <line x1="30" y1="32" x2="770" y2="32" class="divider-strong"/>
+
+  <!-- row 1 -->
+  <text x="30" y="58" class="mono task">Subdomain enum  (3 tools)</text>
+  <rect x="420" y="44" width="160" height="20" rx="3" class="bar-bad"/>
+  <text x="588" y="58" class="mono bad" dx="6">~ 30 min</text>
+  <rect x="640" y="44" width="27" height="20" rx="3" class="bar-good"/>
+  <text x="675" y="58" class="mono good">~ 5 min</text>
+  <line x1="30" y1="70" x2="770" y2="70" class="divider"/>
+
+  <!-- row 2 -->
+  <text x="30" y="96" class="mono task">URL discovery  (3 tools)</text>
+  <rect x="420" y="82" width="200" height="20" rx="3" class="bar-bad"/>
+  <text x="628" y="96" class="mono bad" dx="6">~ 45 min</text>
+  <rect x="640" y="82" width="36" height="20" rx="3" class="bar-good"/>
+  <text x="684" y="96" class="mono good">~ 8 min</text>
+  <line x1="30" y1="108" x2="770" y2="108" class="divider"/>
+
+  <!-- row 3 -->
+  <text x="30" y="134" class="mono task">Live host probing</text>
+  <rect x="420" y="120" width="89" height="20" rx="3" class="bar-bad"/>
+  <text x="517" y="134" class="mono bad" dx="6">~ 20 min</text>
+  <rect x="640" y="120" width="13" height="20" rx="3" class="bar-good"/>
+  <text x="661" y="134" class="mono good">~ 3 min</text>
+  <line x1="30" y1="146" x2="770" y2="146" class="divider"/>
+
+  <!-- row 4 -->
+  <text x="30" y="172" class="mono task">Attack surface triage</text>
+  <rect x="420" y="158" width="134" height="20" rx="3" class="bar-bad"/>
+  <text x="562" y="172" class="mono bad" dx="6">~ 30 min</text>
+  <rect x="640" y="158" width="6" height="20" rx="3" class="bar-good"/>
+  <text x="654" y="172" class="mono good">instant</text>
+  <line x1="30" y1="184" x2="770" y2="184" class="divider-strong"/>
+
+  <!-- total -->
+  <text x="30"  y="212" class="mono total-label">TOTAL</text>
+  <text x="420" y="212" class="mono total-bad">~ 2.5 hours</text>
+  <text x="640" y="212" class="mono total-good">~ 16 minutes</text>
+</svg>

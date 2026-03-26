@@ -1,0 +1,102 @@
+<svg width="800" height="310" viewBox="0 0 800 310" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg  { fill: #0d1117; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .sec-label { font-size: 10px; font-weight: 700; }
+    .name  { font-size: 12px; font-weight: 700; fill: #e6edf3; }
+    .desc  { font-size: 10px; fill: #484f58; }
+    /* HIGH */
+    .h-box { fill: #0d1117; stroke: #da3633; stroke-width: 1.2; }
+    .h-bar { fill: #da3633; }
+    .h-lbl { fill: #da3633; }
+    /* MED */
+    .m-box { fill: #0d1117; stroke: #d29922; stroke-width: 1.2; }
+    .m-bar { fill: #d29922; }
+    .m-lbl { fill: #d29922; }
+    /* INFO */
+    .i-box { fill: #0d1117; stroke: #30363d; stroke-width: 1.2; }
+    .i-lbl { fill: #3d444d; }
+    .i-name { font-size: 12px; font-weight: 700; fill: #8b949e; }
+    .divline { stroke: #21262d; stroke-width: 1; }
+  </style>
+  <rect width="800" height="310" class="bg"/>
+
+  <!-- HIGH label -->
+  <text x="30" y="22" class="mono sec-label h-lbl">HIGH PRIORITY</text>
+  <line x1="152" y1="16" x2="770" y2="16" class="divline"/>
+
+  <!-- sensitive -->
+  <rect x="30"  y="30" width="234" height="58" rx="4" class="h-box"/>
+  <rect x="30"  y="30" width="4"   height="58" rx="2" class="h-bar"/>
+  <text x="46"  y="52" class="mono name">sensitive</text>
+  <text x="46"  y="70" class="mono desc">.git  .env  /backup  /config</text>
+
+  <!-- admin -->
+  <rect x="283" y="30" width="234" height="58" rx="4" class="h-box"/>
+  <rect x="283" y="30" width="4"   height="58" rx="2" class="h-bar"/>
+  <text x="299" y="52" class="mono name">admin</text>
+  <text x="299" y="70" class="mono desc">/admin  /dashboard  /panel  /cp</text>
+
+  <!-- login -->
+  <rect x="536" y="30" width="234" height="58" rx="4" class="h-box"/>
+  <rect x="536" y="30" width="4"   height="58" rx="2" class="h-bar"/>
+  <text x="552" y="52" class="mono name">login</text>
+  <text x="552" y="70" class="mono desc">/login  /auth  /wp-admin  /sso</text>
+
+  <!-- MED label -->
+  <text x="30" y="114" class="mono sec-label m-lbl">MEDIUM PRIORITY</text>
+  <line x1="168" y1="108" x2="770" y2="108" class="divline"/>
+
+  <!-- upload -->
+  <rect x="30"  y="122" width="175" height="58" rx="4" class="m-box"/>
+  <rect x="30"  y="122" width="4"   height="58" rx="2" class="m-bar"/>
+  <text x="46"  y="144" class="mono name">upload</text>
+  <text x="46"  y="162" class="mono desc">/upload  /file  /media</text>
+
+  <!-- api -->
+  <rect x="224" y="122" width="175" height="58" rx="4" class="m-box"/>
+  <rect x="224" y="122" width="4"   height="58" rx="2" class="m-bar"/>
+  <text x="240" y="144" class="mono name">api</text>
+  <text x="240" y="162" class="mono desc">/api/  /v1/  /graphql</text>
+
+  <!-- params -->
+  <rect x="418" y="122" width="175" height="58" rx="4" class="m-box"/>
+  <rect x="418" y="122" width="4"   height="58" rx="2" class="m-bar"/>
+  <text x="434" y="144" class="mono name">params</text>
+  <text x="434" y="162" class="mono desc">?id=  ?redirect=  ?url=</text>
+
+  <!-- backup -->
+  <rect x="612" y="122" width="158" height="58" rx="4" class="m-box"/>
+  <rect x="612" y="122" width="4"   height="58" rx="2" class="m-bar"/>
+  <text x="628" y="144" class="mono name">backup</text>
+  <text x="628" y="162" class="mono desc">.bak  .sql  .zip  .old</text>
+
+  <!-- INFO label -->
+  <text x="30" y="206" class="mono sec-label i-lbl">INFO</text>
+  <line x1="62" y1="200" x2="770" y2="200" class="divline"/>
+
+  <!-- js -->
+  <rect x="30"  y="214" width="136" height="50" rx="4" class="i-box"/>
+  <text x="98"  y="234" class="mono i-name" text-anchor="middle">js</text>
+  <text x="98"  y="252" class="mono desc" text-anchor="middle">.js files</text>
+
+  <!-- json -->
+  <rect x="183" y="214" width="136" height="50" rx="4" class="i-box"/>
+  <text x="251" y="234" class="mono i-name" text-anchor="middle">json</text>
+  <text x="251" y="252" class="mono desc" text-anchor="middle">.json endpoints</text>
+
+  <!-- php -->
+  <rect x="336" y="214" width="136" height="50" rx="4" class="i-box"/>
+  <text x="404" y="234" class="mono i-name" text-anchor="middle">php</text>
+  <text x="404" y="252" class="mono desc" text-anchor="middle">.php files</text>
+
+  <!-- xml -->
+  <rect x="489" y="214" width="136" height="50" rx="4" class="i-box"/>
+  <text x="557" y="234" class="mono i-name" text-anchor="middle">xml</text>
+  <text x="557" y="252" class="mono desc" text-anchor="middle">.xml files</text>
+
+  <!-- errors -->
+  <rect x="642" y="214" width="128" height="50" rx="4" class="i-box"/>
+  <text x="706" y="234" class="mono i-name" text-anchor="middle">errors</text>
+  <text x="706" y="252" class="mono desc" text-anchor="middle">403  401  405</text>
+</svg>
