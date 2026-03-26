@@ -150,7 +150,7 @@ easyrecon --help
 
 ## Screenshot
 
-![image alt](https://github.com/cybersecuritytools/easyrecon/blob/main/"Photo.png?raw=true)
+![image alt](https://github.com/cybersecuritytools/easyrecon/blob/main/Photo.png?raw=true)
 
 ## <img src="https://api.iconify.design/lucide/book-open-check.svg?color=%233b82f6" width="24" align="top" /> Legal & License
 
