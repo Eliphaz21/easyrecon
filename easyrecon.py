@@ -199,7 +199,7 @@ def main() -> None:
 				print_warning("URL phase failed — continuing")
 
 		if not phase or phase == "live":
-			live_subdomains, live_urls, _ = run_live_phase(subdomains, urls, config, output_dir)
+			live_subdomains, live_urls, _ = run_live_phase(subdomains, urls, config, output_dir, target)
 
 		if not phase or phase == "categorize":
 			source_urls = live_urls if live_urls else urls

@@ -24,6 +24,7 @@ def run_live_phase(
     urls: List[str],
     config: Config,
     output_dir: Path,
+    target: str = "",
 ) -> Tuple[List[str], List[str], bool]:
     """
     Run Phase 3+4: Live subdomain + URL detection.
@@ -48,11 +49,11 @@ def run_live_phase(
 
     if subdomains:
         print_phase_header("live")
-        live_subs = _probe_subdomains(subdomains, config, processed_dir)
+        live_subs = _probe_subdomains(subdomains, config, processed_dir, target)
         print_counter("Live subdomains", len(live_subs))
 
     if urls:
-        live_urls = _filter_live_urls(urls, config, processed_dir)
+        live_urls = _filter_live_urls(urls, config, processed_dir, target)
         print_counter("Live URLs", len(live_urls))
 
     return live_subs, live_urls, True
@@ -62,6 +63,7 @@ def _probe_subdomains(
     subdomains: List[str],
     config: Config,
     output_dir: Path,
+    target: str = "",
 ) -> List[str]:
     """Run httpx on subdomains list."""
     import time
@@ -72,7 +74,7 @@ def _probe_subdomains(
 
     timeout = config.get_tool_timeout("httpx")
     
-    with print_live_tools_spinner(["httpx (subdomains)"], "live hosts"):
+    with print_live_tools_spinner(["httpx (subdomains)"], "live_subdomains", target):
         try:
             start = time.time()
             result = subprocess.run(
@@ -119,6 +121,7 @@ def _filter_live_urls(
     urls: List[str],
     config: Config,
     output_dir: Path,
+    target: str = "",
 ) -> List[str]:
     """Run httpx on URLs to filter live ones."""
     import time
@@ -129,7 +132,7 @@ def _filter_live_urls(
 
     timeout = config.get_tool_timeout("httpx")
 
-    with print_live_tools_spinner(["httpx (urls)"], "live urls"):
+    with print_live_tools_spinner(["httpx (urls)"], "live_urls", target):
         try:
             start = time.time()
             result = subprocess.run(

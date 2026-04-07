@@ -69,7 +69,7 @@ def run_url_phase(
                     active_tools.remove(tool_name)
                     if status:
                         if active_tools:
-                            status.update(f"[cyan][bold]{', '.join(active_tools)}[/bold] are running to find out every possible urls on the internet...[/cyan]")
+                            status.update(get_spinner_message(active_tools, "urls", target))
                         else:
                             status.update("[cyan]Finalizing...[/cyan]")
     
@@ -94,7 +94,7 @@ def run_url_phase(
                         active_tools.remove(tool_name)
                     if status:
                         if active_tools:
-                            status.update(f"[cyan][bold]{', '.join(active_tools)}[/bold] are running to find out every possible urls on the internet...[/cyan]")
+                            status.update(get_spinner_message(active_tools, "urls", target))
                         else:
                             status.update("[cyan]Finalizing...[/cyan]")
 
