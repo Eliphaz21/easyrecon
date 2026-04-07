@@ -144,6 +144,3 @@ easyrecon --help
 ## <img src="https://api.iconify.design/lucide/book-open-check.svg?color=%233b82f6" width="24" align="top" /> Legal & License
 
 **Disclaimer:** Only point `easyrecon` at assets you own or possess explicit, written permission to test. Unauthorized scanning is actionable and illegal.
-
-Released under the **MIT License**.  
-Crafted by [@unrealsrabon](https://github.com/unrealsrabon) — part of the [@ai-will-replace-developers](https://github.com/ai-will-replace-developers) initiative.
