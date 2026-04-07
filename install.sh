@@ -25,7 +25,7 @@ BANNER="
  \___/\__,_/____/\__, /_/   \___/\___/\____/_/ /_/ 
                 /____/
 
-  installer v1.0.1 — by @unrealsrabon
+  installer v1.6 — by @unrealsrabon
 "
 
 GO_TOOLS=(
