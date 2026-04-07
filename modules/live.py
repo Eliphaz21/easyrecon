@@ -14,6 +14,7 @@ from utils.merger import save_to_file, load_from_file
 from utils.display import (
     print_phase_header, print_tool_result, print_warning,
     print_counter, print_phase_skip, print_live_subdomain,
+    print_live_tools_spinner,
 )
 from utils.registry import TOOL_REGISTRY
 
@@ -70,47 +71,48 @@ def _probe_subdomains(
         tmp_path = Path(f.name)
 
     timeout = config.get_tool_timeout("httpx")
-
-    try:
-        start = time.time()
-        result = subprocess.run(
-            [
-                "httpx",
-                "-l", str(tmp_path),
-                "-silent",
-                "-status-code",
-                "-title",
-                "-server",
-                "-tech-detect",
-                "-timeout", "10",
-                "-threads", str(config.threads),
-            ],
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-        )
-        elapsed = time.time() - start
-
-        lines = [l.strip() for l in result.stdout.splitlines() if l.strip()]
-        save_to_file(lines, output_dir / "live_subdomains.txt")
-
-        print_tool_result("httpx", "success", len(lines), elapsed)
-
-        for line in lines[:5]:
-            parts = _parse_httpx_line(line)
-            if parts:
-                print_live_subdomain(*parts)
-
-        return lines
-
-    except subprocess.TimeoutExpired:
-        print_warning("httpx timeout on subdomains — partial results")
-        return []
-    except Exception as e:
-        print_warning(f"httpx error: {e}")
-        return []
-    finally:
-        tmp_path.unlink(missing_ok=True)
+    
+    with print_live_tools_spinner(["httpx (subdomains)"]):
+        try:
+            start = time.time()
+            result = subprocess.run(
+                [
+                    "httpx",
+                    "-l", str(tmp_path),
+                    "-silent",
+                    "-status-code",
+                    "-title",
+                    "-server",
+                    "-tech-detect",
+                    "-timeout", "10",
+                    "-threads", str(config.threads),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+            )
+            elapsed = time.time() - start
+    
+            lines = [l.strip() for l in result.stdout.splitlines() if l.strip()]
+            save_to_file(lines, output_dir / "live_subdomains.txt")
+    
+            print_tool_result("httpx", "success", len(lines), elapsed)
+    
+            for line in lines[:5]:
+                parts = _parse_httpx_line(line)
+                if parts:
+                    print_live_subdomain(*parts)
+    
+            return lines
+    
+        except subprocess.TimeoutExpired:
+            print_warning("httpx timeout on subdomains — partial results")
+            return []
+        except Exception as e:
+            print_warning(f"httpx error: {e}")
+            return []
+        finally:
+            tmp_path.unlink(missing_ok=True)
 
 
 def _filter_live_urls(
@@ -127,38 +129,39 @@ def _filter_live_urls(
 
     timeout = config.get_tool_timeout("httpx")
 
-    try:
-        start = time.time()
-        result = subprocess.run(
-            [
-                "httpx",
-                "-l", str(tmp_path),
-                "-silent",
-                "-status-code",
-                "-timeout", "10",
-                "-threads", "100",
-                "-mc", "200,301,302,403,401,405",
-            ],
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-        )
-        elapsed = time.time() - start
-
-        lines = [l.strip() for l in result.stdout.splitlines() if l.strip()]
-        save_to_file(lines, output_dir / "live_urls.txt")
-
-        print_tool_result("httpx (urls)", "success", len(lines), elapsed)
-        return lines
-
-    except subprocess.TimeoutExpired:
-        print_warning("httpx timeout on URLs — partial results")
-        return []
-    except Exception as e:
-        print_warning(f"httpx URL filter error: {e}")
-        return []
-    finally:
-        tmp_path.unlink(missing_ok=True)
+    with print_live_tools_spinner(["httpx (urls)"]):
+        try:
+            start = time.time()
+            result = subprocess.run(
+                [
+                    "httpx",
+                    "-l", str(tmp_path),
+                    "-silent",
+                    "-status-code",
+                    "-timeout", "10",
+                    "-threads", "100",
+                    "-mc", "200,301,302,403,401,405",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+            )
+            elapsed = time.time() - start
+    
+            lines = [l.strip() for l in result.stdout.splitlines() if l.strip()]
+            save_to_file(lines, output_dir / "live_urls.txt")
+    
+            print_tool_result("httpx (urls)", "success", len(lines), elapsed)
+            return lines
+    
+        except subprocess.TimeoutExpired:
+            print_warning("httpx timeout on URLs — partial results")
+            return []
+        except Exception as e:
+            print_warning(f"httpx URL filter error: {e}")
+            return []
+        finally:
+            tmp_path.unlink(missing_ok=True)
 
 
 def _parse_httpx_line(line: str) -> Tuple:

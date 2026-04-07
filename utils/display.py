@@ -29,7 +29,7 @@ except ImportError:
 
 VERSION = "1.0.0"
 
-console = Console() if RICH_AVAILABLE else None
+console = Console(color_system="256") if RICH_AVAILABLE else None
 
 PHASE_COLORS = {
     "subdomain": "cyan",
@@ -74,12 +74,12 @@ def print_banner(target: str, output_dir: str, mode: str = "Full Recon") -> None
             art = "  easyrecon"
     else:
         art = (
-            "  ___  ___  ____  _  _  ____  ___  _____  __ _\n"
-            " | __|/ _ \\/ ___|\\ \\/ /|  _ \\| __||  ___||  ` |\n"
-            " | _|| |_| \\___  \\  / | |_) | _|  | |    | .  |\n"
-            " |___|\\___/ |___/ \\/  |____/|___| |_|    |_|\\_|\n"
+            "   ___  ____ ________  __________  _________  ____ \n"
+            "  / _ \\/ __ `/ ___/ / / / ___/ _ \\/ ___/ __ \\/ __ \\\n"
+            " /  __/ /_/ (__  ) /_/ / /  /  __/ /__/ /_/ / / / /\n"
+            " \\___/\\__,_/____/\\__, /_/   \\___/\\___/\\____/_/ /_/ \n"
+            "                /____/                             \n"
         )
-
     console.print(f"[bold red]{art}[/bold red]")
     console.print(
         Panel.fit(
@@ -114,6 +114,19 @@ def print_phase_header(phase: str) -> None:
     console.print()
 
 
+from contextlib import contextmanager
+
+@contextmanager
+def print_live_tools_spinner(tools: List[str]):
+    """Display a live spinner while tools are running in the background."""
+    if not RICH_AVAILABLE or not tools:
+        yield
+        return
+
+    tools_str = ", ".join(tools)
+    status_msg = f"[cyan]Running tools in parallel: [bold]{tools_str}[/bold]... please wait[/cyan]"
+    with console.status(status_msg, spinner="dots") as status:
+        yield status
 def print_tool_result(
     tool_name: str,
     status: str,

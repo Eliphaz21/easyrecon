@@ -5,8 +5,10 @@ Fast, automated reconnaissance for bug bounty hunters and pentesters.
 """
 
 import argparse
+import os
 import re
 import signal
+import subprocess
 import sys
 import time
 from datetime import datetime
@@ -17,6 +19,14 @@ if sys.version_info < (3, 8):
 	print(f"[!] Python 3.8+ required. Current: {sys.version}")
 	print("    Install from: https://python.org/downloads/")
 	sys.exit(1)
+
+# Prioritize Go binaries so we don't accidentally run system binaries that might require sudo (like Kali's amass)
+try:
+    _go_env = subprocess.run(["go", "env", "GOPATH"], capture_output=True, text=True, timeout=2)
+    _go_bin = Path(_go_env.stdout.strip()) / "bin" if _go_env.stdout.strip() else Path.home() / "go" / "bin"
+except Exception:
+    _go_bin = Path.home() / "go" / "bin"
+os.environ["PATH"] = f"{_go_bin}{os.pathsep}{os.environ.get('PATH', '')}"
 
 from utils.config import Config, load_config
 from utils.checker import auto_install_missing, check_all_tools, check_go

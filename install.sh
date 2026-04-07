@@ -19,11 +19,11 @@ DIM='\033[2m'
 NC='\033[0m'
 
 BANNER="
- _____    _    ______   ______  _____ ____ ___  _   _ 
-| ____|  / \  / ___\ \ / /  _ \| ____/ ___/ _ \| \ | |
-|  _|   / _ \ \___ \\ V /| |_) |  _|| |  | | | |  \| |
-| |___ / ___ \ ___) || | |  _ <| |__| |__| |_| | |\  |
-|_____/_/   \_\____/ |_| |_| \_\_____\____\___/|_| \_|
+   ___  ____ ________  __________  _________  ____ 
+  / _ \/ __ \`/ ___/ / / / ___/ _ \/ ___/ __ \/ __ \\
+ /  __/ /_/ (__  ) /_/ / /  /  __/ /__/ /_/ / / / /
+ \___/\__,_/____/\__, /_/   \___/\___/\____/_/ /_/ 
+                /____/
 
   installer v1.0.1 — by @unrealsrabon
 "
@@ -141,7 +141,8 @@ install_go_tools() {
     echo ""
 
     # Ensure Go binaries are found in PATH during current script execution
-    export PATH="$PATH:$HOME/go/bin"
+    USER_GOPATH=$(go env GOPATH 2>/dev/null || echo "$HOME/go")
+    export PATH="$PATH:$USER_GOPATH/bin"
 
     FAILED=()
 
@@ -227,12 +228,14 @@ EOF
 check_go_path() {
     local shell_rc
     shell_rc="$(detect_shell_rc)"
+    local user_gopath
+    user_gopath=$(go env GOPATH 2>/dev/null || echo "$HOME/go")
 
-    if [[ ":$PATH:" != *":$HOME/go/bin:"* ]]; then
-        print_warn "~/go/bin is not in your PATH"
+    if [[ ":$PATH:" != *":$user_gopath/bin:"* ]]; then
+        print_warn "$user_gopath/bin is not in your PATH"
         print_info "Add to your shell rc file:"
-        print_info "  export PATH=\$PATH:\$HOME/go/bin"
-        ensure_path_export 'export PATH=$PATH:$HOME/go/bin' "$shell_rc"
+        print_info "  export PATH=\$PATH:$user_gopath/bin"
+        ensure_path_export "export PATH=\$PATH:$user_gopath/bin" "$shell_rc"
     fi
 
     if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then

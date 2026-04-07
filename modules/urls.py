@@ -11,7 +11,7 @@ from utils.config import Config
 from utils.runner import run_tool, ToolResult, CriticalToolMissing
 from utils.merger import merge_urls, save_to_file
 from utils.display import (
-    print_phase_header, print_tool_result,
+    print_phase_header, print_tool_result, print_live_tools_spinner,
     print_warning, print_counter, print_phase_skip,
 )
 from utils.registry import PHASE_TOOLS
@@ -54,30 +54,41 @@ def run_url_phase(
             executor.submit(run_tool, tool_name, target, config): tool_name
             for tool_name in enabled_tools
         }
-
-        for future in as_completed(futures):
-            tool_name = futures[future]
-            try:
-                result: ToolResult = future.result()
-                results[tool_name] = result.lines
-
-                print_tool_result(
-                    tool_name=tool_name,
-                    status=result.status,
-                    count=result.count,
-                    elapsed=result.elapsed,
-                    message=result.message,
-                )
-
-                if config.save_raw and result.lines:
-                    save_to_file(result.lines, raw_dir / f"{tool_name}.txt")
-
-            except CriticalToolMissing as e:
-                print_phase_skip("urls", str(e))
-                return [], False
-            except Exception as e:
-                print_warning(f"{tool_name} unexpected error: {e}")
-                results[tool_name] = []
+        
+        active_tools = enabled_tools.copy()
+        
+        with print_live_tools_spinner(active_tools) as status:
+            for future in as_completed(futures):
+                tool_name = futures[future]
+                try:
+                    result: ToolResult = future.result()
+                    results[tool_name] = result.lines
+    
+                    print_tool_result(
+                        tool_name=tool_name,
+                        status=result.status,
+                        count=result.count,
+                        elapsed=result.elapsed,
+                        message=result.message,
+                    )
+                    
+                    active_tools.remove(tool_name)
+                    if status and active_tools:
+                        status.update(f"[cyan]Running tools in parallel: [/cyan][bold]{', '.join(active_tools)}[/bold][cyan]... please wait[/cyan]")
+    
+                    if config.save_raw and result.lines:
+                        save_to_file(result.lines, raw_dir / f"{tool_name}.txt")
+    
+                except CriticalToolMissing as e:
+                    print_phase_skip("urls", str(e))
+                    return [], False
+                except Exception as e:
+                    print_warning(f"{tool_name} unexpected error: {e}")
+                    results[tool_name] = []
+                    if tool_name in active_tools:
+                        active_tools.remove(tool_name)
+                    if status and active_tools:
+                         status.update(f"[cyan]Running tools in parallel: [/cyan][bold]{', '.join(active_tools)}[/bold][cyan]... please wait[/cyan]")
 
     all_urls = merge_urls(results)
 
